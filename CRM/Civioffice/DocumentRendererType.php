@@ -139,6 +139,11 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
      */
     public function replaceAllTokens($string, $token_contexts = []): string
     {
+        if (array_key_exists('case', $token_contexts)) {
+            $contact_id = CRM_Civioffice_Form_Task_CreateCaseDocuments::getCaseClientContactId($token_contexts['case']['entity_id']);
+            $token_contexts['contact'] = ['entity_id' => $contact_id];
+        }
+
         // Add implicit contact token context for contributions.
         if (
             array_key_exists('contribution', $token_contexts)
@@ -215,6 +220,10 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
                 case 'event':
                     $token_row->context('eventId', $context['entity_id']);
                     $token_row->context('event', $context['entity']);
+                    break;
+                case 'case':
+                    $token_row->context('caseId', $context['entity_id']);
+                    $token_row->context('case', $context['entity']);
                     break;
                 default:
                     // todo: implement?
