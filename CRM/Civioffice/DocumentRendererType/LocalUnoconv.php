@@ -573,6 +573,12 @@ class CRM_Civioffice_DocumentRendererType_LocalUnoconv extends CRM_Civioffice_Do
      */
     protected function unlock()
     {
+
+        // Fixes warnings when the 'unoconv lock file path' isn't resource
+        if (is_string($this->unoconv_lock_file_path)) {
+            $this->unoconv_lock_file_path = fopen($this->unoconv_lock_file_path, "r+");
+        }
+
         if ($this->unoconv_lock_file_path) {
             if (!flock($this->unoconv_lock_file_path, LOCK_UN)) {
                 Civi::log()->debug("CiviOffice: Could not release unoconv lock.");
