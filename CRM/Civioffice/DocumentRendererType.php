@@ -148,6 +148,20 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
             }
         }
 
+        // Add related Contact and Case
+        if (array_key_exists('activity', $token_contexts)) {
+            $contact_id = CRM_Civioffice_Form_Task_CreateActivityDocuments::getActivityContactId($token_contexts['activity']['entity_id']);
+            $case_id = CRM_Civioffice_Form_Task_CreateActivityDocuments::getActivityCaseId($token_contexts['activity']['entity_id']);
+
+            if (!empty($case_id)) {
+                $token_contexts['case'] = ['entity_id' => $case_id];
+            }
+
+            if (!empty($contact_id)) {
+                $token_contexts['contact'] = ['entity_id' => $contact_id];
+            }
+        }
+
         // Add implicit contact token context for contributions.
         if (
             array_key_exists('contribution', $token_contexts)
@@ -228,6 +242,10 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
                 case 'case':
                     $token_row->context('caseId', $context['entity_id']);
                     $token_row->context('case', $context['entity']);
+                    break;
+                case 'activity':
+                    $token_row->context('activityId', $context['entity_id']);
+                    $token_row->context('activity', $context['entity']);
                     break;
                 default:
                     // todo: implement?

@@ -139,6 +139,9 @@ class CRM_Civioffice_ConversionJob
                     case 'case':
                         $contact_id = CRM_Civioffice_Form_Task_CreateCaseDocuments::getCaseClientContactId($entity_id);
                         break;
+                    case 'activity':
+                        $contact_id = CRM_Civioffice_Form_Task_CreateActivityDocuments::getActivityContactId($entity_id);
+                        break;
                 }
                 civicrm_api3('Activity', 'create', [
                     'activity_type_id' => $this->activity_type_id,
