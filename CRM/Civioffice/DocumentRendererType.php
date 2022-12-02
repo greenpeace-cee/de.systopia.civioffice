@@ -241,11 +241,13 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
                     break;
                 case 'case':
                     $token_row->context('caseId', $context['entity_id']);
-                    $token_row->context('case', $context['entity']);
+                    $entity = !empty($context['entity']) ? $context['entity'] : NULL;
+                    $token_row->context('case', $entity);
                     break;
                 case 'activity':
                     $token_row->context('activityId', $context['entity_id']);
-                    $token_row->context('activity', $context['entity']);
+                    $entity = !empty($context['entity']) ? $context['entity'] : NULL;
+                    $token_row->context('activity', $entity);
                     break;
                 default:
                     // todo: implement?
