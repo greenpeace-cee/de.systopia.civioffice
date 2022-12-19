@@ -155,6 +155,7 @@ abstract class CRM_Civioffice_DocumentRendererType extends CRM_Civioffice_Office
 
             if (!empty($case_id)) {
                 $token_contexts['case'] = ['entity_id' => $case_id];
+                $contact_id = CRM_Civioffice_Form_Task_CreateCaseDocuments::getCaseClientContactId($case_id);
             }
 
             if (!empty($contact_id)) {
