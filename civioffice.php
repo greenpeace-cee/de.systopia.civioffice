@@ -33,6 +33,22 @@ function civioffice_civicrm_searchTasks($objectType, &$tasks)
             'result' => false
         ];
     }
+    if ($objectType == 'case')
+    {
+        $tasks[] = [
+            'title' => E::ts('Create Documents (CiviOffice)'),
+            'class' => 'CRM_Civioffice_Form_Task_CreateCaseDocuments',
+            'result' => false
+        ];
+    }
+    if ($objectType == 'activity')
+    {
+        $tasks[] = [
+            'title' => E::ts('Create Documents (CiviOffice)'),
+            'class' => 'CRM_Civioffice_Form_Task_CreateActivityDocuments',
+            'result' => false
+        ];
+    }
 }
 
 function civioffice_civicrm_summaryActions(&$actions, $contactID)
