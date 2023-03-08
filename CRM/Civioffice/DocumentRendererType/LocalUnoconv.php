@@ -576,6 +576,10 @@ class CRM_Civioffice_DocumentRendererType_LocalUnoconv extends CRM_Civioffice_Do
 
         // Fixes warnings when the 'unoconv lock file path' isn't resource
         if (is_string($this->unoconv_lock_file_path)) {
+            if (!file_exists($this->unoconv_lock_file_path)) {
+                $this->unoconv_lock_file_path = null;
+                return;
+            }
             $this->unoconv_lock_file_path = fopen($this->unoconv_lock_file_path, "r+");
         }
 
