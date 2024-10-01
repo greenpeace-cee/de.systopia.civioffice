@@ -94,7 +94,7 @@ function civioffice_civicrm_summaryActions(&$actions, $contactID)
     $actions['open_document_with_single_contact'] = [
         'ref'         => 'civioffice-render-single',
         'title'       => E::ts('Create CiviOffice document'),
-        'weight'      => -110, // to the top!
+        'weight'      => 0,
         'key'         => 'open_document_with_single_contact',
         'class'       => 'medium-popup',
         'href'        => CRM_Utils_System::url('civicrm/civioffice/document_from_single_contact', "reset=1"), // fixme contact id is passed twice as pid
