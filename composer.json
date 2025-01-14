@@ -1,5 +1,6 @@
 {
     "name": "systopia/de.systopia.civioffice",
+    "type": "civicrm-ext",
     "description": "CiviCRM integration for various exchangeable office suites",
     "license": "AGPL-3.0",
     "authors": [
